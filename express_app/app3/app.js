@@ -2,7 +2,8 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
-var cookieParser = require('cookie-parser');
+var cookieParser = require('cookie-parser');//针对cookie的中间件；
+// var session = require('express-session');//针对session的中间件
 var bodyParser = require('body-parser');
 
 // model——模版
@@ -15,12 +16,15 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 var include_test = require('./routes/include_test');
 var register = require('./routes/login/register');
+var login = require('./routes/login/login');
+var image_push = require('./routes/image_push');
 
 // 接口数据
 var user = require('./models/user');
 var api = require('./models/api');
 var api_register = require('./models/register');
 var api_easymysql = require('./models/api_easymysql');
+var api_user = require('./models/api_user');
 var app = express();
 
 // view engine setup
@@ -33,16 +37,26 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+
 app.use(express.static(path.join(__dirname, 'public')));
 
+// 页面路由
 app.use('/', routes);
 app.use('/users', users);
-app.use('/api', api);
-app.use('/api_easymysql', api_easymysql);
 app.use('/include_test', include_test);
-app.use('/user', user);
 app.use('/register', register);
+app.use('/login', login);
+app.use('/image_push', image_push);
+
+
+//api路由
+app.use('/api', api);
+app.use('/user', user);
 app.use('/api_register', api_register);
+app.use('/api_easymysql', api_easymysql);
+app.use('/api_user', api_user);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

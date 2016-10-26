@@ -22,7 +22,7 @@ var check=function(req,res,next){
                 }else{
                     status=true;
                 }
-                res.header("Access-Control-Allow-Origin", "*");
+                // res.header("Access-Control-Allow-Origin", "*");
                 res.send(status)
         })
     })
@@ -45,23 +45,33 @@ var insert=function(req,res,next){
         })
     })
 }
-var test=function(req,res,next){
+var tests=function(req,res,next){
     db.pool.getConnection(function(err,connection){
        res.send(true)
     })
 }
 router.post('/', function(req, res, next) {
-    
-        switch(req.body.method){
+        var state=false;
+        var parme;
+        for(var i in req.query){
+            state=true;
+        }
+        if (state) {
+            parme=req.query
+        }else{
+             parme=req.body
+        };
+        switch(parme.method){
             case 'check':{
                     check(req,res,next)
             } break;
             case 'send':{
                     insert(req,res,next)
             } break;
-            case 'test':{
-                console,log('sdfsdfsdf')
-                    test(req,res,next)
+            case 'tests':{
+                console.log('sdfsdfsdf')
+                res.send(true)
+                    // tests(req,res,next)
             } break;
         }
 });

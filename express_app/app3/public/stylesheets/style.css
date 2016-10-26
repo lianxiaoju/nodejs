@@ -29,9 +29,45 @@ a {
 	float: left;
 	width: 300px;
 	font-size: 12px;
-	
+	height: 30px;
+	line-height: 30px;
 }
 #form button{
+	margin: 0 auto;
+	display: block;
+	width: 300px;
+	background:skyblue;
+	font-size: 16px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	
+}
+#login_form{
+	width: 460px;
+	margin:0 auto;
+	
+	list-style: none;
+}
+#login_form li{
+	margin:10px 0;
+	overflow: hidden;
+}
+#login_form label{
+	float: left;
+	width: 150px;
+	font-size: 16px;
+
+}
+#login_form input{
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	width: 300px;
+	font-size: 12px;
+	
+}
+#login_form button{
 	margin: 0 auto;
 	display: block;
 	width: 300px;

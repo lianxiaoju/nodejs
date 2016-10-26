@@ -1,7 +1,32 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title><%= title %></title>
-    <link rel='stylesheet' href='/stylesheets/style.css' />
-  </head>
-  <body>
+<% include ../header.ejs %>
+	<div>
+		
+		<ul id="login_form">
+			<li><label>当前用户：</label><b id="user_name"></b></li>
+			<li><label>用户名：</label><input type="text" id="name"><b id="name_b"></b></li>
+			<li><label>密码：</label><input type="text" id="password"><b id="password_b"></b></li>			
+			<li><button id="send">发送</button></li>
+		</ul>
+	</div>
+<% include ../footer.ejs %>
+<script>
+	$("#send").click(function(){
+		$.ajax({
+			url:"/api_user",
+			data:{
+				name:$("#name").val(),
+				password:$("#password").val()
+			},
+			type:'get',
+			dataType:'json',
+			cache:true,
+			success:function(data) {
+				alert(data)
+				if (data==true) {
+					$("#user_name").html($("#name").val())
+				} else{};
+			}
+		})
+	})
+	
+</script>

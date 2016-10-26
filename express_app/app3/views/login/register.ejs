@@ -32,7 +32,7 @@ $("#name").blur(function(){
 		    	val:$("#name").val()
 		    },
 		    type:'post',    
-		    cache:false,    
+		    cache:true,    
 		    dataType:'json',    
 		    success:function(data) {   
 		        if (data==false) {
@@ -66,7 +66,7 @@ $("#email").blur(function(){
 	    	val:$("#email").val()
 	    },
 	    type:'post',    
-	    cache:false,    
+	    cache:true,    
 	    dataType:'json',    
 	    success:function(data) {    
 	        if (data==false) {
@@ -144,7 +144,7 @@ $("#qq").blur(function(){
 	    	val:$("#qq").val()
 	    },
 	    type:'post',    
-	    cache:false,    
+	    cache:true,    
 	    dataType:'json',    
 	    success:function(data) { 
 	        if (data==false) {
@@ -197,7 +197,7 @@ var sends=function(){
 	    url:'/api_register',// 跳转到 action    
 	    data:data,
 	    type:'post',    
-	    cache:false,    
+	    cache:true,    
 	    dataType:'json',    
 	    success:function(data) {    
 	        alert('ok')

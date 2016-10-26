@@ -1,0 +1,50 @@
+<% include('header') %>
+ 	<div style="margin :0px auto; width:990px;">
+
+		<input type="file"  name="file" id="doc" multiple="multiple"  style="width:150px;"  accept="image/*" />
+
+		<div id="dd" style=" width:990px;"><img src="" alt="" id="img_head"></div>
+
+	</div>
+<% include('footer') %>
+
+ <script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+ <script>
+ 	$("#doc").on("change",function(){
+ 		// alert(2)
+ 		if (docObj.files && docObj.files[i]) {
+ 			img_head.style.display = 'block';
+
+	        img_head.style.width = '150px';
+
+	        img_head.style.height = '180px';
+	        img_head.src = window.URL.createObjectURL(doc.files[0]);
+ 		}
+ 		
+ 	})
+ 	var handle=function(data){
+ 		var htmls="";
+ 		$.each(data,function(n,i){
+ 			console.log(i)
+ 			htmls+="<li><span>"+i.id+"</span><span>"+i.qq+"</span><span>"+i.email+"</span><span>"+i.address+"</span></li>"
+ 		})
+ 		$("#ul_user").html(htmls)
+ 	}
+ 	var aj = $.ajax( {    
+	    url:'/api_easymysql',// 跳转到 action    
+	    data:{    
+	            
+	    },    
+	    type:'get',    
+	    cache:false,    
+	    dataType:'json',    
+	    success:function(data) {    
+	        handle(data)
+	     },    
+	     error : function() {    
+	          
+	     }    
+	});  
+
+  
+ </script>
