@@ -1,0 +1,223 @@
+<% include ../header.ejs %>
+	<div>
+		<ul id="form">
+			<li><label>请输入用户名：</label><input type="text" id="name"><b id="name_b"></b></li>
+			<li><label>请输入密码：</label><input type="text" id="password1"><b id="password1_b"></b></li>
+			<li><label>请再次输入密码：</label><input type="text" id="password2"><b id="password2_b"></b></li>
+			<li><label>请输入邮箱：</label><input type="text" id="email"><b id="email_b"></b></li>
+			<li><label>请输入qq：</label><input type="text" id="qq"><b id="qq_b"></b></li>
+			<li><label>请输入地址：</label><input type="text" id="address"><b id="address_b"></b></li>
+			<li><button id="send">发送</button></li>
+		</ul>
+	</div>
+<% include ../footer.ejs %>
+<script type="text/javascript">
+var name_state,password1_state,password2_state,email_state,qq_state,address_state;
+var email_test=/\w[-\w.+]*@([A-Za-z0-9][-A-Za-z0-9]+\.)+[A-Za-z]{2,14}/
+var qq_test=/[1-9]([0-9]{5,11})/
+ // 6-20 位，字母、数字、字符
+var reg_password = /^(?=.{6,16}$)(?![0-9]+$)(?!.*(.).*\1)[0-9a-zA-Z]+$/;
+//非空
+var nullreg = /\S/;
+//用户名：限16个字符，支持中英文、数字、减号或下划线
+var reg_name = /^[a-zA-Z\d]\w{3,11}[a-zA-Z\d]$/;
+$("#name").blur(function(){
+	if (nullreg.test($("#name").val())&&reg_name.test($("#name").val())) {
+		$.ajax( { 
+		    url:'/api_register',// 跳转到 action 
+		    timeout:10000,   
+		    data:{
+		    	method:'check',
+		    	name:'name',
+		    	val:$("#name").val()
+		    },
+		    type:'post',    
+		    cache:false,    
+		    dataType:'json',    
+		    success:function(data) {   
+		        if (data==false) {
+		        	$("#name_b").html('该用户名已经被注册')
+		        	$("#name").val("")
+		        	name_state=0;
+		        }else{
+		        	$("#name_b").html('该用户名可以使用')
+		        	name_state=1;
+		        };
+		     },    
+		     error : function() {    
+		         $("#name_b").html("数据库为空或者数据库错误")
+		     }    
+		});  
+	}else{
+		$("#name_b").html('该用户名不能为空')
+		$("#name").val("")
+		name_state=0;
+	};
+	
+})
+$("#email").blur(function(){
+	if (nullreg.test($("#email").val())&&email_test.test($("#email").val())) {
+		$.ajax( { 
+	    url:'/api_register',// 跳转到 action  
+	    timeout:10000,  
+	    data:{
+	    	method:'check',
+	    	name:'email',
+	    	val:$("#email").val()
+	    },
+	    type:'post',    
+	    cache:false,    
+	    dataType:'json',    
+	    success:function(data) {    
+	        if (data==false) {
+	        	$("#email_b").html('该邮箱已经被注册')
+	        	$("#email").val("")
+		        	email_state=0;
+	        }else{
+	        	$("#email_b").html('该邮箱可以使用')
+	        	email_state=1;
+	        };
+	     },    
+	     error : function() {    
+	         $("#email").val("")
+		        	email_state=0;
+	     }    
+	});  
+	}else{
+		$("#email_b").html('该邮箱格式不正确')
+		$("#email").val("")
+		  email_state=0;
+	}
+})
+$("#password1").blur(function(){
+	if (nullreg.test($("#password1").val())&&reg_password.test($("#password1").val())) {
+		if($("#password2").val()!=""){
+			if ($("#password2").val()==$("#password1").val()) {
+				$("#password1_b").html('密码可用')
+				password1_state=1
+			}else{
+				$("#password1_b").html('两次密码不一致')
+				password1_state=0;
+				$("#password1").val("")
+			};
+			
+		}else{
+			$("#password1_b").html('密码可用')
+				password1_state=1;
+		}
+	}else{
+		$("#password1_b").html('密码格式不对')
+			password1_state=0
+		$("#password1").val("")
+	};
+})
+$("#password2").blur(function(){
+	if (nullreg.test($("#password2").val())&&reg_password.test($("#password2").val())) {
+		if($("#password1").val()!=""){
+			if ($("#password2").val()==$("#password1").val()) {
+				$("#password2_b").html('密码可用')
+				password2_state=1
+			}else{
+				$("#password2_b").html('两次密码不一致')
+				password2_state=0;
+				$("#password2").val("")
+			};
+			
+		}else{
+			$("#password2_b").html('密码可用')
+				password2_state=1;
+		}
+	}else{
+		$("#password2_b").html('密码格式不对')
+			password2_state=0
+		$("#password2").val("")
+	};
+})
+$("#qq").blur(function(){
+	if (nullreg.test($("#qq").val())&&qq_test.test($("#qq").val())) {
+		$.ajax( { 
+	    url:'/api_register',// 跳转到 action 
+	    timeout:10000,   
+	    data:{
+	    	method:'check',
+	    	name:'qq',
+	    	val:$("#qq").val()
+	    },
+	    type:'post',    
+	    cache:false,    
+	    dataType:'json',    
+	    success:function(data) { 
+	        if (data==false) {
+	        	$("#qq_b").html('该qq已经被注册')
+	        	$("#qq").val("")
+		        	qq_state=0;
+	        }else{
+	        	$("#qq_b").html('该qq可以使用')
+	        	qq_state=1;
+	        };
+	     },    
+	     error : function() {    
+	         $("#qq").val("")
+		        	qq_state=0;
+	     }    
+	});  
+	}else{
+		$("#qq_b").html('该qq格式不正确')
+		$("#qq").val("")
+		  qq_state=0;
+	}
+	
+})
+$("#address").blur(function(){
+	if (nullreg.test($("#address").val())) {
+		  $("#address_b").html('地址已填写')
+		  address_state=1;
+	}else{
+		$("#address_b").html('地址未填写')
+		$("#address").val("")
+		  address_state=0;
+	}
+	
+})
+$("#send").click(function(){
+	if ($("#name").val()!=""&&$("#password1").val()!=""&&$("#password2").val()!=""&&$("#email").val()!=""&&$("#qq").val()!=""&&$("#address").val()!=""&&($("#password1").val()==$("#password2").val())) {
+		sends()
+	};
+})
+var sends=function(){
+	var data={
+		method:'send',
+		name:$("#name").val(),
+		password:$("#password1").val(),
+		email:$("#email").val(),
+		qq:$("#qq").val(),
+		address:$("#address").val()
+	}
+	$.ajax( {    
+	    url:'/api_register',// 跳转到 action    
+	    data:data,
+	    type:'post',    
+	    cache:false,    
+	    dataType:'json',    
+	    success:function(data) {    
+	        alert('ok')
+	        $("#name").val("")
+	        $("#password1").val("")
+	        $("#password2").val("")
+	        $("#email").val("")
+	        $("#qq").val("")
+	        $("#address").val("")
+	        $("#name_b").html("")
+	        $("#password1_b").html("")
+	        $("#password2_b").html("")
+	        $("#email_b").html("")
+	        $("#qq_b").html("")
+	        $("#address_b").html("")
+	     },    
+	     error : function() {    
+	          
+	     }    
+	});  
+}
+	
+</script>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <ul>
+  		<% for(var i=0;i<data.length;i++){ %>
+			<li>
+				<span><%=data[i].name %></span>
+				<span><%=data[i].age %></span>
+				<span><%=data[i].city %></span>
+			</li>
+  		<% } %>
+    </ul>
+    <p><a href="include_test">数据库数据的加载</a></p>
+    <p><a href="register">注册</a></p>
+    <p><a href="include_test">登入</a></p>
+  </body>
+</html>

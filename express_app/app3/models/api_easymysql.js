@@ -1,0 +1,41 @@
+var mysql = require('easymysql');
+var connection = mysql.create({
+    'maxconnections' : 10
+});
+connection.addserver({
+  'host' : '127.0.0.1',
+  'user' : 'root',
+  'password' : '123456',
+  'database' : 'test',
+});
+
+connection.on('busy', function (queuesize, maxconnections, which) {
+    // XXX: write log and monitor it
+    // console.log(which)
+});
+connection.query('SHOW DATABASES', function (error, res) {
+    console.log(res);
+});
+
+var express = require('express');
+var router = express.Router();
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+
+    if (req.query && req.query.callback) {
+        //console.log(params.query.callback);
+        res.jsonp({status: 200, message: "ÕâÊÇÒ»¸öJSONP½Ó¿Ú", data:[]});
+    } else {
+        connection.query('SELECT * FROM user_ajax', function(err, rows, fields) {
+            console.log(rows);
+                
+            // res.json({status: 200, message: "这是一个接口", data:rows});
+            res.send(rows)
+
+        });
+        // connection.end();
+    }
+});
+
+module.exports = router;

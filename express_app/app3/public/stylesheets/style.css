@@ -1,0 +1,44 @@
+*{
+	margin:0;padding:0;
+}
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+#form{
+	width: 460px;
+	margin:0 auto;
+	
+	list-style: none;
+}
+#form li{
+	margin:10px 0;
+	overflow: hidden;
+}
+#form label{
+	float: left;
+	width: 150px;
+	font-size: 16px;
+
+}
+#form input{
+	float: left;
+	width: 300px;
+	font-size: 12px;
+	
+}
+#form button{
+	margin: 0 auto;
+	display: block;
+	width: 300px;
+	background:skyblue;
+	font-size: 16px;
+	height: 30px;
+	line-height: 30px;
+	text-align: center;
+	
+}
