@@ -16,6 +16,20 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`test` /*!40100 DEFAULT CHARACTER SET ut
 
 USE `test`;
 
+/*Table structure for table `image_url` */
+
+DROP TABLE IF EXISTS `image_url`;
+
+CREATE TABLE `image_url` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `url` varchar(1000) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+/*Data for the table `image_url` */
+
+insert  into `image_url`(`id`,`url`) values (5,'/file/a.jpg'),(7,'/file/3.png');
+
 /*Table structure for table `user` */
 
 DROP TABLE IF EXISTS `user`;
@@ -60,11 +74,11 @@ CREATE TABLE `user_login` (
   `qq` int(11) DEFAULT NULL,
   `address` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
 
 /*Data for the table `user_login` */
 
-insert  into `user_login`(`id`,`name`,`password`,`email`,`qq`,`address`) values (1,'chenyuanguang','c12345','12432423@qq.com',121312213,'北京朝阳区'),(2,'chenyuang','a12345','3131244@qq.com',1231242,'beijingshi'),(3,'chenss','a12345','3r332@qq.com',242432,'sfsafasfa'),(4,'chenes','a12345','34235@qq.com',24232353,'sfsagsagsa'),(5,'cheness','a12345','3423325@qq.com',4324234,'nanjingshi'),(6,'liyang','a12345','23424@qq.com',4234252,'ashfsof'),(7,'chensheng','a12345','23432532@qq.com',224234,'sdfasfa'),(8,'dasheng','a12345','234235@qq.com',423553,'beijing'),(9,'dashengs','a12345','34255256@qq.com',43254654,'sfsaggdsg'),(10,'lichen','a12345','837990335@qq.com',3243244,'sfasfasf');
+insert  into `user_login`(`id`,`name`,`password`,`email`,`qq`,`address`) values (1,'chenyuanguang','c12345','12432423@qq.com',121312213,'北京朝阳区'),(2,'chenyuang','a12345','3131244@qq.com',1231242,'beijingshi'),(3,'chenss','a12345','3r332@qq.com',242432,'sfsafasfa'),(4,'chenes','a12345','34235@qq.com',24232353,'sfsagsagsa'),(5,'cheness','a12345','3423325@qq.com',4324234,'nanjingshi'),(6,'liyang','a12345','23424@qq.com',4234252,'ashfsof'),(7,'chensheng','a12345','23432532@qq.com',224234,'sdfasfa'),(8,'dasheng','a12345','234235@qq.com',423553,'beijing'),(9,'dashengs','a12345','34255256@qq.com',43254654,'sfsaggdsg'),(10,'lichen','a12345','837990335@qq.com',3243244,'sfasfasf'),(11,'chenss','q12345','8379903333@qq.com',242342,'beijing'),(12,'nihao','a12345','sfasf@qq.com',2423434,'sfasfa');
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

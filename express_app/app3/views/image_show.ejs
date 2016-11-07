@@ -1,0 +1,60 @@
+<% include('header') %>
+	<p style="width:100px;height:50px;line-height:50px;text-align:center;margin:0 auto;border:1px solid black" id="send">请求图片</p>
+ 	<div style="width:900px;overflow:hidden;margin:0 auto;" id="content">
+ 	</div>
+ 	<p style="width:100px;height:50px;line-height:50px;text-align:center;margin:0 auto;border:1px solid black" id="sends">请求图片下载</p>
+ 	<div style="width:900px;overflow:hidden;margin:0 auto;" id="a_">
+ 		<!-- <a href="/api_image_download/file/a.jpg">sdfs</a> -->
+ 	</div>
+	
+<% include('footer') %>
+
+<script src="/javascripts/jquery.min.js" type="text/javascript"></script>
+<script>
+ 	$("#send").click(function(){
+ 		$.ajax({
+ 			url:"/api_image_sever",
+ 			type:"get",
+ 			dataType:"json",
+ 			success : function(data) 
+			{ 
+				console.log(data)
+				var datas=eval(data)
+				console.log(datas[0].url)
+				var imgs="",$a="";
+				for (var i = 0; i < datas.length; i++) {
+					console.log(datas[i])
+					imgs+='<img src="'+datas[i].url+'" alt="" style="width:200px;height:200px;margin:10px;">'
+					$a+='<a href="/api_image_download'+datas[i].url+'" style="display:block;">图片'+i+'下载</a>'
+				};
+				$("#content").html(imgs);
+				$("#a_").html($a);
+			}, 
+			error : function(e)
+			{ 
+				console.log(e); 
+			} 
+		}) 
+ 	})
+ 	// $("#sends").click(function(){
+ 	// 	$.ajax({
+ 	// 		url:"/api_image_download",
+ 	// 		type:"get",
+ 	// 		dataType:"json",
+ 	// 		success : function(data) 
+		// 	{ 
+		// 		var datas=eval(data)
+		// 		var $a="";
+		// 		for (var i = 0; i < datas.length; i++) {
+		// 			console.log(datas[i])
+		// 			$a+='<a href="'+datas[i].url+'" style="display:block;">图片'+i+'下载</a>'
+		// 		};
+		// 		$("#a_").html($a);
+		// 	}, 
+		// 	error : function(e)
+		// 	{ 
+		// 		console.log(e); 
+		// 	} 
+		// }) 
+ 	// })
+</script>

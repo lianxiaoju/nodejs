@@ -1,3 +1,5 @@
+
+global.pro="sfs";
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -18,6 +20,7 @@ var include_test = require('./routes/include_test');
 var register = require('./routes/login/register');
 var login = require('./routes/login/login');
 var image_push = require('./routes/image_push');
+var image_show = require('./routes/image_show');
 
 // 接口数据
 var user = require('./models/user');
@@ -25,6 +28,10 @@ var api = require('./models/api');
 var api_register = require('./models/register');
 var api_easymysql = require('./models/api_easymysql');
 var api_user = require('./models/api_user');
+var api_image_push = require('./models/api_image_push');
+var push_progress = require('./models/push_progress');
+var api_image_sever = require('./models/api_image_sever');
+var api_image_download = require('./models/api_image_download');
 var app = express();
 
 // view engine setup
@@ -47,6 +54,7 @@ app.use('/include_test', include_test);
 app.use('/register', register);
 app.use('/login', login);
 app.use('/image_push', image_push);
+app.use('/image_show', image_show);
 
 
 //api路由
@@ -55,7 +63,10 @@ app.use('/user', user);
 app.use('/api_register', api_register);
 app.use('/api_easymysql', api_easymysql);
 app.use('/api_user', api_user);
-
+app.use('/api_image_push', api_image_push);
+app.use('/push_progress', push_progress);
+app.use('/api_image_sever', api_image_sever);
+app.use('/api_image_download', api_image_download);
 
 
 // catch 404 and forward to error handler
