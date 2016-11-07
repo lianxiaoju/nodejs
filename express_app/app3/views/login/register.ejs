@@ -34,7 +34,7 @@ $("#name").blur(function(){
 		    type:'post',    
 		    cache:true,    
 		    dataType:'json',    
-		    success:function(data) {   
+		    success:function(data) {
 		        if (data==false) {
 		        	$("#name_b").html('该用户名已经被注册')
 		        	$("#name").val("")

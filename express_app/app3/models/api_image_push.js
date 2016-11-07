@@ -42,7 +42,7 @@ router.post('/', function(req, res, next) {
             // console.log(fileDataArr);
             var fileData = fileDataArr[0];
 
-            var uploadedPath = fileData.path;//暂存的路径，就是uploadDir存入的路径；
+            var uploadedPath = fileData.path;//赞存的路径，就是uploadDir存入的路径；
 
             var dstPath = './../public/file/' + fileData.originalFilename;//重命名后将要转移的路径+文件新名称（读取上传的原文件的名字）
             //文件的重命名以及转移操作；

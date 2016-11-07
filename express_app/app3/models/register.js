@@ -11,19 +11,23 @@ var check=function(req,res,next){
                 if(rows.length!=0){
                     console.log(rows)
                     console.log(req.body.val)
+                    console.log(req.body.name)
                      for (var i = 0; i < rows.length; i++) {
-                        if (rows[i][req.body.name]==req.body.val) {
-                            status=false;
-                            
-                        }else{
-                            status=true;
-                        };
+                         switch (rows[i][req.body.name]){
+                             case req.body.val:{
+                                 status=false;
+                             } break;
+                         }
                     };
                 }else{
                     status=true;
                 }
                 // res.header("Access-Control-Allow-Origin", "*");
-                res.send(status)
+            console.log(status)
+            if(status!=false){
+                status=true;
+            }
+            res.send(status)
         })
     })
 }
